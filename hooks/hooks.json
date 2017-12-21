@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ping",
+    "response-message": "pong",
+    "execute-command": "hooks/ping.sh",
+    "command-working-directory": "."
+  },
+  {
+    "id": "redeploy-gomad",
+    "execute-command": "hooks/deploy-gomad.sh",
+    "command-working-directory": ".",
+    "trigger-rule":
+    {
+      "and": [
+        {
+          "match": {
+            "type": "value",
+            "value": "latest",
+            "parameter": {
+              "source": "payload",
+              "name": "pushdata.tag"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "value",
+            "value": "SUPER_SECRET",
+            "parameter": {
+              "source": "url",
+              "name": "token"
+            }
+          }
+        }
+      ]
+    }
+  }
+]
