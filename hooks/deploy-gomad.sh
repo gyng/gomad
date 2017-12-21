@@ -1,4 +1,4 @@
 #!/bin/sh
-echo Deploying gomad @ $NOMAD_ADDR
+# echo Deploying gomad @ $NOMAD_ADDR
 
-nomad run hooks/gomad.nomad
+nomad run --address http://nomad.service.consul:4646 hooks/gomad.nomad
