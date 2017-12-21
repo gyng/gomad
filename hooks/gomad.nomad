@@ -23,6 +23,8 @@ job "gomad" {
                 volumes = [
                     "local/hooks/hooks.json:/hooks/hooks.json"
                 ]
+
+                dns_servers = ["169.254.1.1"]
             }
 
             // TODO: Extract hooks.json from KV, check in and use templates to
