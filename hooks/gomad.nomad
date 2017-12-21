@@ -7,11 +7,15 @@ job "gomad" {
         task "server" {
             driver = "docker"
 
+            env {
+                NOMAD_ADDR = "{{ key \"gomad/NOMAD_ADDR\" }}"
+            }
+
             config {
                 image = "gyng/gomad"
                 command = "webhook"
                 args = [
-                    "-hooks"
+                    "-hooks",
                     "/hooks/hooks.json",
                     "-verbose"
                 ]
@@ -19,10 +23,6 @@ job "gomad" {
                 port_map = {
                     http = 9000
                 }
-
-                // volumes = [
-                //     "local/hooks:/hooks"
-                // ]
             }
 
             // template {
@@ -43,12 +43,16 @@ job "gomad" {
 
                 tags = [
                     "traefik.enable=true",
-                    "traefik.frontend.rule=Host:a.b.c.d"
+                    "traefik.frontend.rule=Host:{{ key \"gomad/host\" }}"
                 ]
             }
 
             resources {
                 memory = 300
+
+                network {
+                    port "http" {}
+                }
             }
         }
     }

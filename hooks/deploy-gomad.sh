@@ -1,2 +1,4 @@
 #!/bin/sh
-echo Hello, world!
+echo Redeploying gomad!
+
+nomad run hooks/gomad.nomad
