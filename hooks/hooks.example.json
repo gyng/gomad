@@ -9,8 +9,14 @@
     "id": "redeploy-gomad",
     "execute-command": "hooks/deploy-gomad.sh",
     "command-working-directory": ".",
-    "trigger-rule":
-    {
+    "pass-environment-to-command": [
+      {
+        "source": "string",
+        "envname": "NOMAD_ADDR",
+        "name": "https://nomad.x.y"
+      }
+    ],
+    "trigger-rule": {
       "and": [
         {
           "match": {

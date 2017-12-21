@@ -1,4 +1,4 @@
 #!/bin/sh
-echo Redeploying gomad!
+echo Deploying gomad @ $NOMAD_ADDR
 
 nomad run hooks/gomad.nomad
