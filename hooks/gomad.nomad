@@ -23,12 +23,18 @@ job "gomad" {
                 port_map = {
                     http = 9000
                 }
+
+                volumes = [
+                    "local/hooks/hooks.json:/hooks.json"
+                ]
             }
 
-            // template {
-            //     data = "{{ key \"gomad/hooks/hooks.json\" }}"
-            //     destination = "local/hooks/hooks.json"
-            // }
+            // TODO: Extract hooks.json from KV, check in and use templates to
+            // interpolate sensitive things (eg. tokens)
+            template {
+                data = "{{ key \"gomad/hooks.json\" }}"
+                destination = "local/hooks/hooks.json"
+            }
 
             service {
                 name = "${JOB}-server"
